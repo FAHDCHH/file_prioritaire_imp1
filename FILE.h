@@ -14,16 +14,16 @@ typedef struct node {
 } node;
 
 typedef struct File {
-    node *tete;   // Front of the queue
-    node *arriere; // Rear of the queue
+    node *tete;
+    node *arriere;
 } File;
 
 node *cree_node(float e);
 File empty_file();
 bool est_vide(File F);
 int longueur(File F);
-void enfiler(File *F, float e);  // Always add to the end of the linked list (queue)
-void defiler(File *F);  // Remove the oldest element (front)
+void enfiler(File *F, float e);
+void defiler(File *F);
 float premier(File F);
 void display_file(File F);
 

@@ -5,31 +5,31 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-// Function to create a new node
+// Fonction pour créer un nouveau nœud
 node *cree_node(float e) {
     node *new_node = (node *)malloc(sizeof(node));
     if (new_node == NULL) {
-        return NULL;  // Memory allocation failed
+        return NULL;  // Échec d'allocation mémoire
     }
     new_node->data = e;
-    new_node->next = NULL;  // The next pointer is NULL for the last node
+    new_node->next = NULL;  // Le pointeur suivant est NULL pour le dernier nœud
     return new_node;
 }
 
-// Function to create an empty file (queue)
+// Fonction pour créer une file vide
 File empty_file() {
     File F;
-    F.tete = NULL;  // Front of the queue is initially NULL
-    F.arriere = NULL;  // Rear of the queue is initially NULL
+    F.tete = NULL;  // La tête de la file est initialement NULL
+    F.arriere = NULL;  // L'arrière de la file est initialement NULL
     return F;
 }
 
-// Function to check if the file (queue) is empty
+// Fonction pour vérifier si la file est vide
 bool est_vide(File F) {
-    return F.tete == NULL;  // If tete is NULL, the queue is empty
+    return F.tete == NULL;  // Si tete est NULL, la file est vide
 }
 
-// Function to get the length of the file (queue)
+// Fonction pour obtenir la longueur de la file
 int longueur(File F) {
     int len = 0;
     node *temp = F.tete;
@@ -40,51 +40,53 @@ int longueur(File F) {
     return len;
 }
 
-// Function to add an element to the end of the file (queue)
+// Fonction pour ajouter un élément à la fin de la file
 void enfiler(File *F, float e) {
     node *new_node = cree_node(e);
     if (new_node == NULL) {
-        return;  // Memory allocation failed
+        return;  // Échec d'allocation mémoire
     }
 
     if (est_vide(*F)) {
-        // If the queue is empty, both tete and arriere point to the new node
+        // Si la file est vide, la tête et l'arrière pointent vers le nouveau nœud
         F->tete = new_node;
         F->arriere = new_node;
     } else {
-        // Otherwise, add the new node after the current arriere
-        F->arriere->next = new_node;  // Update the current rear node's next pointer
-        F->arriere = new_node;  // Update arriere to point to the new last node
+        // Sinon, ajouter le nouveau nœud après l'arrière actuel
+        F->arriere->next = new_node;  // Mettre à jour le pointeur suivant de l'arrière
+        F->arriere = new_node;  // Mettre à jour l'arrière pour pointer sur le nouveau dernier nœud
     }
 }
 
-// Function to remove the first node from the file (queue)
+// Fonction pour supprimer le premier nœud de la file
 void defiler(File *F) {
     if (est_vide(*F)) {
-        return;  // No elements to remove
+        return;  // Aucun élément à supprimer
     }
 
     node *temp = F->tete;
-    F->tete = temp->next;  // Move tete to the next node
+    F->tete = temp->next;  // Déplacer la tête vers le nœud suivant
 
     if (F->tete == NULL) {
-        // If the queue is now empty, reset arriere to NULL
+        // Si la file est maintenant vide, réinitialiser l'arrière à NULL
         F->arriere = NULL;
     }
 
-    free(temp);  // Free the memory of the removed node
+    free(temp);  // Libérer la mémoire du nœud supprimé
 }
 
-// Function to return the data of the first node in the file (queue)
+// Fonction pour retourner les données du premier nœud de la file
 float premier(File F) {
     if (est_vide(F)) {
-        return -1;  // Return a sentinel value for an empty file
+        return -1;  // Retourner une valeur sentinelle pour une file vide
     }
-    return F.tete->data;  // Return the data of the first node
+    return F.tete->data;  // Retourner les données du premier nœud
 }
+
+// Fonction pour afficher tous les éléments de la file
 void display_file(File F) {
     if (est_vide(F)) {
-        printf("The queue is empty.\n");
+        printf("La file est vide.\n");
         return;
     }
     node *current = F.tete;
