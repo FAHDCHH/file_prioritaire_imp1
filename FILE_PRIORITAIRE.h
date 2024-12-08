@@ -1,6 +1,4 @@
-//
-// Created by FAHD on 08/12/2024.
-//
+
 #ifndef FILE_PRIORITAIRE_H
 #define FILE_PRIORITAIRE_H
 

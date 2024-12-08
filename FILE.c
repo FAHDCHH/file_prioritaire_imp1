@@ -1,6 +1,4 @@
-//
-// Created by FAHD on 08/12/2024.
-//
+
 #include "file.h"
 #include <stdlib.h>
 #include <stdio.h>
